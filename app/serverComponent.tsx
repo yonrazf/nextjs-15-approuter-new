@@ -1,12 +1,18 @@
-import { getAppUserSession, getAppUserTokens } from "@frontegg/nextjs/app";
+import { getAppUserSession } from "@frontegg/nextjs/app";
+import { idToNameMap as tenantIdToNameMap } from "./tenants";
+import UserJwt from "./UserJwt";
+import JwtComp from "./JwtComp";
 
 export const ServerSession = async () => {
   const userSession = await getAppUserSession();
-  const tokens = await getAppUserTokens();
+  const sessionTenant = tenantIdToNameMap[userSession?.tenantId] || "No Tenant";
   return (
     <div>
-      <div>user session server side: {JSON.stringify(userSession)}</div>;
-      <div>user tokens server side: {JSON.stringify(tokens)}</div>
+      <JwtComp serversideJwt={userSession} />
+      <div>
+        User tenant (Server Side):
+        {sessionTenant}
+      </div>
     </div>
   );
 };

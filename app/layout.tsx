@@ -1,4 +1,5 @@
 import { FronteggAppProvider } from "@frontegg/nextjs/app";
+import "@/app/styles/globals.css";
 
 export default function RootLayout({
   children,
@@ -14,7 +15,7 @@ export default function RootLayout({
       <head></head>
       <body>
         {/* @ts-expect-error Server Component for more details visit: https://github.com/vercel/next.js/issues/42292 */}
-        <FronteggAppProvider authOptions={authOptions} hostedLoginBox={false}>
+        <FronteggAppProvider authOptions={authOptions}>
           {children}
         </FronteggAppProvider>
       </body>
